@@ -68,6 +68,9 @@ class Person {
 }
 
 class Employee : public Person {
+  public: 
+    Employee(Ticket, Admin, name, phone, email);
+    void update_ticket(id);
   private:
     int id
     Ticket ticket
@@ -75,12 +78,19 @@ class Employee : public Person {
 }
 
 class Admin : public Person {
+  public: 
+    void create_employee();
   private: 
     int id
     Ticket ticket
+    Garage garage
 }
 
 class Ticket {
+  public:
+    Ticket();
+    // no destructor for historical records sake
+    Ticket find_by_status(string status);
   private:
     int id
     Employee employee
@@ -91,11 +101,16 @@ class Ticket {
 }
 
 class Customer : public Person {
+  public:
+    Customer();
   private:
     Ticket ticket
 }
 
 class Garage {
+  public: 
+    Garage(int capital);
+    Admin create_admin(int gross);
   private:
     int gross_total
     Employee list
@@ -106,8 +121,8 @@ class Garage {
 ### 4. Tests
 
 ```c++
-  garage = Garage.new(/* admin/garage attrs */);
-  admin = garage.admin.first
+  garage = Garage.new(/* garage attrs */);
+  admin = garage.create_admin();
   employee = admin.create_employee(/* Employee attrs */);
   ticket = admin.create_ticket(/* vehicle attrs, customer attrs, ticket attrs */);
   ticket.assign(&employee);
