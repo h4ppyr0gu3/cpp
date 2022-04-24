@@ -45,6 +45,8 @@ The document of Preliminary Projects has to containfour points:
 
 ### 2. Memory Map
 
+![alt text][https://github.com/h4ppyr0gu3/cpp/blob/master/map.jpg]
+
 ### 3. Classes
 
 ```c++
@@ -81,7 +83,6 @@ class Admin : public Person {
 class Ticket {
   private:
     int id
-    Admin admin
     Employee employee
     string status // enum
     Vehicle vehicle
