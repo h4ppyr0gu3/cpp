@@ -16,7 +16,15 @@ The document of Preliminary Projects has to containfour points:
 
 ## Car garage
 
-### Story
+### 1. Story
+
+1. Admin creates a customer
+2. Admin/Customer creates a ticket
+3. Admin assigns ticket
+4. Employee changes status of ticket
+5. Employee closes ticket
+6. Admin confirms status
+7. when completed the price goes up
 
 - Keep track of progress and inventory within a garage setting 
 - Allow only admins to take new orders but keep a possible client list
@@ -27,7 +35,17 @@ The document of Preliminary Projects has to containfour points:
 - Employee can update the status only of a customer ticket
 - Employee can log additional details 
 
-#### Classes
+
+#### Restrictions
+
+- Employee can't create or assign tickets
+- Admin cannot assign Employee unless they are the supervisor
+- some attributes are enumerable
+- only admin can create admin, customer, ticket, employee
+
+### 2. Memory Map
+
+### 3. Classes
 
 ```c++
 class Vehicle {
@@ -37,7 +55,7 @@ class Vehicle {
     int year
     int cc
     int parking // 1..3
-    string type // enum
+    string type // enum: [motorcycle, car, bus]
 }
 
 class Person {
@@ -65,7 +83,37 @@ class Ticket {
     int id
     Admin admin
     Employee employee
+    string status // enum
+    Vehicle vehicle
+    Customer customer
+    int cost
+}
+
+class Customer : public Person {
+  private:
+    Ticket ticket
+}
+
+class Garage {
+  private:
+    int gross_total
+    Employee list
+    Admin list
 }
 ```
 
+### 4. Tests
 
+```c++
+  garage = Garage.new(/* admin/garage attrs */);
+  admin = garage.admin.first
+  employee = admin.create_employee(/* Employee attrs */);
+  ticket = admin.create_ticket(/* vehicle attrs, customer attrs, ticket attrs */);
+  ticket.assign(&employee);
+  ticket.show;
+  admin.show;
+  employee.show;
+  customer.show;
+  vehicle.show;
+```
+  
